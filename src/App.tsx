@@ -1,17 +1,19 @@
+import React from 'react';
+
 import './App.css';
 import Marvel from "./components/Marvel";
 import DC from "./components/DC";
 
-function  App() {
-  return (
-    <div className="App">
+function App() {
+    return (
+      <div className="App">
         <div className='table-column'>
-         <Marvel/>
+          <Marvel />
         </div>
         <div className='table-column'>
-          <DC/>
+          <DC />
         </div>
-    </div>
+      </div>
   );
 }
 

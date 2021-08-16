@@ -12,6 +12,12 @@ export const PreViewHero = ({dataHero}) => {
         setOpen(false);
     };
 
+    const handleCloseButton = () => {
+        if(dataHero.onClose()===undefined){
+           return;
+        }else setOpen(false);
+    };
+
     return <div className='pre-view-hero'>
         <div className='pre-hero-header' onClick={handleOpen}>
             <img src={dataHero.url}
@@ -23,6 +29,7 @@ export const PreViewHero = ({dataHero}) => {
         <SimpleModal
             openModal={open}
             onClose={handleClose}
+            handleCloseButton={handleCloseButton}
             dataHero={dataHero}
         />
     </div>

@@ -5,7 +5,8 @@ import Modal from '@material-ui/core/Modal';
 import {makeStyles} from '@material-ui/core/styles';
 import {ViewHero} from "./ViewHero";
 
-export const SimpleModal = ({openModal,onClose,dataHero}) => {
+export const SimpleModal = ({openModal,onClose,handleCloseButton,dataHero}) => {
+
     const rand = () => Math.round(Math.random() * 20) - 10;
 
     const getModalStyle = () => {
@@ -34,23 +35,20 @@ export const SimpleModal = ({openModal,onClose,dataHero}) => {
     const [modalStyle] = React.useState(getModalStyle);
 
     const body = <div style = {modalStyle} className = {classes.paper}>
-        {dataHero?.isClick && <button
-            className = 'modal-close-button'
-            onClick = {onClose}/>
-        }
+       <button className = 'modal-close-button'  onClick = {handleCloseButton}/>
         <ViewHero dataHero = {dataHero}/>
         <SimpleModal/>
     </div>;
 
     return (
-      <Modal
-        open = {openModal}
-        onClose = {onClose}
-        aria-labelledby = "simple-modal-title"
-        aria-describedby = "simple-modal-description"
+        <Modal
+            open = {openModal}
+            onClose = {onClose}
+            aria-labelledby = "simple-modal-title"
+            aria-describedby = "simple-modal-description"
         >
-        {body}
-      </Modal>
+            {body}
+        </Modal>
     )
 }
 

@@ -1,25 +1,32 @@
 import React, {useEffect, useState} from "react";
 
-import Hero from "../interface/Hero";
 import {DCList} from "../initData/DCdata";
 import {PreViewHero} from "./PreViewHero";
 import {getPhotos} from "../api/getPhotos";
+import {DCHero} from "./DCHero";
 
 const DC =  () => {
-    let infoPhotos;
+    let infoPhotos: { urls: { small: string; }; }[];
     let [createDClList, seCreateDClList] = useState([])
 
-    useEffect(async() => {
+    // @ts-ignore
+    useEffect(async (): Promise<any> => {
         infoPhotos = await getPhotos();
+
+        // @ts-ignore
         seCreateDClList(DCList.map((hero,index) =>
-            new Hero(hero.name,hero.description,false,infoPhotos[index].urls.thumb)));
+            new DCHero(
+                hero.name,
+                hero.description,
+                infoPhotos[index].urls.small,
+            )));
     },[]);
 
     return <div >
         <h1>DC</h1>
         <div className = 'list-heroes' >
             {
-                createDClList?.map(hero => <PreViewHero dataHero = {hero} />)
+                createDClList?.map(hero => <PreViewHero dataHero = {hero}/>)
             }
         </div>
     </div>

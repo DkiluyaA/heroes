@@ -1,18 +1,25 @@
 import React, {useEffect, useState} from "react";
 
-import Hero from "../interface/Hero";
 import {PreViewHero} from "./PreViewHero";
 import {MarvelList} from "../initData/Marveldata";
 import {getPhotos} from "../api/getPhotos";
+import {MarvelHero} from "./MarvelHero";
 
-const Marvel =  () => {
-    let infoPhotos;
+const Marvel = () =>{
+    let infoPhotos: { urls: { small: string; }; }[];
     let [createMarvelList, seCreateMarvelList] = useState([])
 
-    useEffect(async() => {
+   // @ts-ignore
+    useEffect(async () => {
         infoPhotos = await getPhotos();
-        seCreateMarvelList(MarvelList.map((hero,index) =>
-            new Hero(hero.name,hero.description,true,infoPhotos[index].urls.small)));
+
+        // @ts-ignore
+        seCreateMarvelList(MarvelList.map((hero,index)  =>
+            new MarvelHero(
+                hero.name,
+                hero.description,
+                infoPhotos[index].urls.small,
+             )));
     },[]);
 
     return <div >
